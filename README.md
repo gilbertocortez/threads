@@ -1,5 +1,5 @@
 # threads
-Meta Threads API Connections using PHP
+Meta Threads API Connection using PHP
 
 In this project I show you how to log in to the Meta Threads API using PHP, HTML, and a bit of JavaScript. We will do it using what is laid out in the documentation, using cURL as a main way of communicating with the API.
 
