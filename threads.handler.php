@@ -25,9 +25,9 @@ session_start();
 // App details
 // Be sure to use threads id and secret (not app one)
 // ------------------------------------------------------------------------------------------------------------------------
-$app_id = 'APP_ID';
-$app_secret = 'APP_SECRET';
-$redirect_uri = 'REDIRECT_URL'; // Must match the one used in the login URL
+$app_id = '';
+$app_secret = '';
+$redirect_uri = ''; // Must match the one used in the login URL
 
 // ------------------------------------------------------------------------------------------------------------------------
 // Check to see if user already has a (temporary) access token

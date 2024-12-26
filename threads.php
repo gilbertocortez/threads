@@ -7,11 +7,12 @@
     <title>Facebook Login</title>
     <script>
         // Replace these values with your actual app details
-        const appId = "APP_ID"; // Threads/Facebook App ID
-        const redirectUri = encodeURIComponent("REDIRECT_URL"); // Redirect URI
-        const scope = encodeURIComponent("threads_basic", "threads_content_publish"); // Required permissions
+        const appId = "app_id"; // Threads/Facebook App ID
+        const redirectUri = encodeURIComponent("redirect_uri"); // Redirect URI
+        const scope = encodeURIComponent("threads_basic,threads_content_publish"); // Required permissions
+        // "threads_manage_replies", "threads_read_replies", "threads_manage_insights"
         const state = "custom_state"; // Optional state parameter for CSRF protection
-        
+
         // Construct the authorization URL
         const log_in = `https://threads.net/oauth/authorize
 			?client_id=${appId}
@@ -80,11 +81,18 @@
             // Check for decoding errors
             if (json_last_error() === JSON_ERROR_NONE) {
                 // Successfully decoded
+                $_SESSION['user_data'] = $response_data;
                 echo "ID: " . $response_data->id . "\n<br/>";
                 echo "Username: " . $response_data->username . "\n<br/>";
                 echo "Name: " . $response_data->name . "\n<br/>";
                 echo "Profile Picture URL: " . $response_data->threads_profile_picture_url . "\n<br/>";
                 echo "Biography: " . $response_data->threads_biography . "\n<br/>";
+
+                $profile_pic_url = $response_data->threads_profile_picture_url;
+    ?>
+                <p><a href="post_message.threads.php">Send Message</a></p>
+                <?php
+
             } else {
                 // Handle JSON decoding error
                 echo "Error decoding JSON: " . json_last_error_msg();
@@ -97,7 +105,7 @@
         // --------------------------------------------------------------------------------------------------------------------
         // HTML Front End when logged in
         // --------------------------------------------------------------------------------------------------------------------
-    ?>
+        ?>
         <button onclick="openLoginWindow()" disabled>Already logged with Threads/Facebook</button>
     <?php
     }
